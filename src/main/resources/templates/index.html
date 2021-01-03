@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/scss/style.css}" rel="stylesheet" />
+    <title>Biuro podróży QuoVadis</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                QuoVadis
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">
+                            Strona główna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="galeria.html" class="nav-link">
+                            Galeria
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kontakt.html" class="nav-link">
+                            Kontakt
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="jumbotron-bg"
+                th:style="'background: url(/assets/background.jpg) center center / cover no-repeat;'">
+            </div>
+            <div id="ani" style="position: relative">
+                <h1 class="display-4">Witamy w biurze QuoVadis</h1>
+                <p class="lead">Lorem ipsum</p>
+                <p class="lead">Lorem ipsum dolor sit amet</p>
+                <a href="galeria.html" id="jbutton" class="btn btn-lg btn-outline-info">
+                    Zobacz miejsca w które możesz z nami pojechać
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+<div class="container">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Strona główna</a>
+        <div id="1breadcrumb" class="breadcrumb-item active">Podróże w kraju</div>
+    </nav>
+
+    <main class="row">
+        <div class="col-md-3">
+            <h3 class="mb-4">Kategorie</h3>
+            <div class="list-group">
+                <button id="kraj" class="list-group-item active list-group-item-action text-white">
+                    Podróże w kraju
+                </button>
+                <button id="europa" class="list-group-item list-group-item-action text-white">
+                    Podróże w Europie
+                </button>
+                <button id="swiat" class="list-group-item list-group-item-action text-white">
+                    Podróże na inny kontynent
+                </button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h3 class="mb-4">Dostępne wycieczki</h3>
+            <ul class="pagination">
+                <li id="previous" class="page-item">
+                    <button class="page-link">
+                        Poprzednia
+                    </button>
+                </li>
+                <li id="1" class="page-item active">
+                    <a class="page-link">
+                        1
+                    </a>
+                </li>
+                <li id="2" class="page-item">
+                    <a class="page-link">
+                        2
+                    </a>
+                </li>
+                <li id="3" class="page-item">
+                    <a class="page-link">
+                        3
+                    </a>
+                </li>
+                <li id="next" class="page-item">
+                    <button class="page-link">
+                        Następna
+                    </button>
+                </li>
+            </ul>
+            <div id="brak" style="display: none">
+                <h2>Brak następnych ofert</h2>
+            </div>
+            <div id="oferty" class="accordion" style="position: relative">
+                <div class="row">
+                    <div th:each="trip : ${Trips}" class="col-md-4">
+                        <div class="card">
+                            <img id="wroclaw"
+                                 th:src="${trip.img_url}"
+                                 class="card-img-top" data-toggle="collapse" data-target="#collapseOne"
+                                 aria-expanded="true" aria-controls="collapseOne">
+                            <div class="card-body">
+                                <h4 th:text="${trip.title}" id="title1" class="card-title mb-0"></h4>
+                                <span th:text="${trip.summary}" id="summary1" class="mt-0"></span>
+                            </div>
+                            <div id="collapseOne" class="collapse hide" data-parent="#oferty">
+                                <div class="col-md-12" id="offerInfo1">
+                                    <h3 id="bodytitle1"> Wycieczka do Wrocławia! </h3>
+                                    <p th:text="${trip.info}" id="info1"></p>
+                                    <br>
+                                    <a class="btn btn-primary my-2 w-100" href="form.html">
+                                        Rezerwuj
+                                    </a>
+                                </div>
+                            </div>
+                            <div th:text="${trip.price + ' zł/os'}" id="footer1" class="card-footer text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer class="bg-dark py-4 mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h5>QuoVadis</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid atque cum dicta dolore et magni
+                    maiores minima nemo nisi non, nostrum quod. Autem dolorem laborum magnam, perspiciatis placeat quam
+                    unde.</p>
+            </div>
+            <div class="col-md-4">
+                <form action="get">
+                    <h5>Newsletter</h5>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="adres e-mail">
+                        <a class="btn btn-primary">
+                            Zapisz się
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="stopka py-2">
+    <p class="text-center m-0">&copy;CP</p>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/przyciski.js}"></script>
+<script type="text/javascript" th:src="@{/js/oferty.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
