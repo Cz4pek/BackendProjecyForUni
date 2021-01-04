@@ -1,5 +1,13 @@
 function ofertaSwiat() {
-    window.location.href = '/world';
+
+    var url = 'http://localhost:8080/world';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $("#oferty").html(data);
+        }
+    })
     $('#kraj').removeClass('active');
     $('#europa').removeClass('active');
     $('#swiat').addClass('active');
@@ -9,14 +17,28 @@ function ofertaSwiat() {
 
 function ofertakKraj() {
 
-    window.location.href = '/country';
+    var url = 'http://localhost:8080/country';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $("#oferty").html(data);
+        }
+    })
     $('#kraj').addClass('active');
     $('#europa').removeClass('active');
     $('#swiat').removeClass('active');
 }
 
 function ofertaEuropa() {
-    window.location.href = '/continent';
+    var url = 'http://localhost:8080/continent';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $("#oferty").html(data);
+        }
+    })
     $('#kraj').removeClass('active');
     $('#europa').addClass('active');
     $('#swiat').removeClass('active');

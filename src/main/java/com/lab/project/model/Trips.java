@@ -17,7 +17,7 @@ public class Trips {
     @NotNull
     private String summary;
     @NotNull
-    private String bodyTitle;
+    private String bodytitle;
     @NotNull
     private String info;
     @NotNull
@@ -58,11 +58,11 @@ public class Trips {
     }
 
     public String getBodyTitle() {
-        return bodyTitle;
+        return bodytitle;
     }
 
-    public void setBodyTitle(String bodyTitle) {
-        this.bodyTitle = bodyTitle;
+    public void setBodyTitle(String bodytitle) {
+        this.bodytitle = bodytitle;
     }
 
     public String getInfo() {
@@ -88,4 +88,5 @@ public class Trips {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }

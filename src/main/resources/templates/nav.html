@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-$END$
+
+    <div th:fragment="nav" class="container">
+        <a href="/" class="navbar-brand">
+            QuoVadis
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        Strona główna
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery" class="nav-link">
+                        Galeria
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link">
+                        Kontakt
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:fragment="footer" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h5>QuoVadis</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid atque cum dicta dolore et magni
+                    maiores minima nemo nisi non, nostrum quod. Autem dolorem laborum magnam, perspiciatis placeat quam
+                    unde.</p>
+            </div>
+            <div class="col-md-4">
+                <form action="get">
+                    <h5>Newsletter</h5>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="adres e-mail">
+                        <a class="btn btn-primary">
+                            Zapisz się
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
+
+

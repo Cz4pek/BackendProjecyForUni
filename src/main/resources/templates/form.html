@@ -1,47 +1,18 @@
 <!doctype html>
-<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="scss/style.css">
+    <link th:href="@{/scss/style.css}" rel="stylesheet" />
 
     <title>Biuro podróży QuoVadis</title>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-        <div class="container">
-            <a href="/" class="navbar-brand">
-                QuoVadis
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav navbar-right">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link active">
-                            Strona główna
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="galeria.html" class="nav-link">
-                            Galeria
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="kontakt.html" class="nav-link">
-                            Kontakt
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <nav th:insert="nav.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="jumbotron-bg"
@@ -50,7 +21,7 @@
                 <h1 class="display-4">Witamy w biurze QuoVadis</h1>
                 <p class="lead">Lorem ipsum</p>
                 <p class="lead">Lorem ipsum dolor sit amet</p>
-                <a href="galeria.html" id="jbutton" class="btn btn-lg btn-outline-info">
+                <a href="gallery" id="jbutton" class="btn btn-lg btn-outline-info">
                     Zobacz miejsca w które możesz z nami pojechać
                 </a>
             </div>
@@ -84,7 +55,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tel">Telefon</label>
-                    <input value="111111111" type="text" title="Proszę wprowdzić adres email z uwzględnieniem znaku @" required title="Numer telefonu składa się z 9 następujących po sobie cyfr" class="form-control" id="tel" placeholder="Nr telefonu" pattern="[0-9]{9}">
+                    <input value="111111111" type="text" required title="Numer telefonu składa się z 9 następujących po sobie cyfr" class="form-control" id="tel" placeholder="Nr telefonu" pattern="[0-9]{9}">
                 </div>
             </div>
             <div class="form-row">
@@ -337,29 +308,7 @@
         </div>
     </main>
 </div>
-<footer class="bg-dark py-4 mt-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h5>QuoVadis</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid atque cum dicta dolore et magni
-                    maiores minima nemo nisi non, nostrum quod. Autem dolorem laborum magnam, perspiciatis placeat quam
-                    unde.</p>
-            </div>
-            <div class="col-md-4">
-                <form action="get">
-                    <h5>Newsletter</h5>
-                    <div class="input-group">
-                        <input type="email" title="Proszę wprowdzić adres email z uwzględnieniem znaku @" class="form-control" placeholder="adres e-mail">
-                        <a class="btn btn-primary">
-                            Zapisz się
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</footer>
+<footer th:insert="nav.html :: footer" class="bg-dark py-4 mt-3"></footer>
 <div class="stopka py-2">
     <p class="text-center m-0">&copy;CP</p>
 </div>
@@ -367,8 +316,8 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/przyciski.js"></script>
-<script src="js/storage.js"></script>
+<script type="text/javascript" th:src="@{/js/przyciski.js}"></script>
+<script type="text/javascript" th:src="@{/js/storage.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>

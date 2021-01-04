@@ -13,25 +13,33 @@ public class TripsController {
     @Autowired
     private TripsService service;
 
-    @GetMapping("/world")
-    public String getTripsFromWorld( Model model){
-        Trips[] allTrips = service.getTripsFromWorld();
+    @GetMapping("/")
+    public String getTripsDefault( Model model){
+        Trips[] allTrips = service.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
         return "index";
     }
 
-    @GetMapping(path = {"/country", "/"})
+
+    @GetMapping("/world")
+    public String getTripsFromWorld( Model model){
+        Trips[] allTrips = service.getTripsFromWorld();
+        model.addAttribute("Trips", allTrips);
+        return "index::offer";
+    }
+
+    @GetMapping("/country")
     public String getTripsFromCountry( Model model){
         Trips[] allTrips = service.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
-        return "index";
+        return "index::offer";
     }
 
     @GetMapping("/continent")
     public String getTripsFromContinent( Model model){
         Trips[] allTrips = service.getTripsFromContinent();
         model.addAttribute("Trips", allTrips);
-        return "index";
+        return "index::offer";
     }
 
 

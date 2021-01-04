@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('#rezerwuj').click(function () {
         var dane = {};
         dane.imie = $('#imie').val();
