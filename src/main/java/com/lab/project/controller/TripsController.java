@@ -1,6 +1,6 @@
 package com.lab.project.controller;
 
-import com.lab.project.model.Trips;
+import com.lab.project.model.Trip;
 import com.lab.project.service.TripsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class TripsController {
 
     @GetMapping("/")
     public String getTripsDefault( Model model){
-        Trips[] allTrips = service.getTripsFromCountry();
+        Trip[] allTrips = service.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
         return "index";
     }
@@ -23,21 +23,21 @@ public class TripsController {
 
     @GetMapping("/world")
     public String getTripsFromWorld( Model model){
-        Trips[] allTrips = service.getTripsFromWorld();
+        Trip[] allTrips = service.getTripsFromWorld();
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }
 
     @GetMapping("/country")
     public String getTripsFromCountry( Model model){
-        Trips[] allTrips = service.getTripsFromCountry();
+        Trip[] allTrips = service.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }
 
     @GetMapping("/continent")
     public String getTripsFromContinent( Model model){
-        Trips[] allTrips = service.getTripsFromContinent();
+        Trip[] allTrips = service.getTripsFromContinent();
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }

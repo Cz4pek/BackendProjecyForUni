@@ -30,13 +30,27 @@ $(document).ready(function () {
             }
         })
 
-        dane.opcje = opcje;
-
+        dane.opcje = opcje.toString() === '' ? null : opcje.toString();
         if (validates('')) {
             var lista = JSON.parse(localStorage.getItem('lista'));
             if (lista === null) lista = [];
             lista.push(dane);
             localStorage.setItem('lista', JSON.stringify(lista));
+            console.log(JSON.stringify(dane));
+            fetch(' http://localhost:8080/form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dane)
+            })
+                .then(response => console.log(response))
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
 
     });

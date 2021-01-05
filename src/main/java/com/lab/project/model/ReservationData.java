@@ -14,7 +14,7 @@ public class ReservationData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer res_id;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+    @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓa-ząśżźłćó]{1,30})(\\s\\d+/*\\d*)+")
     private String adres;
     @NotNull
     private Integer dzieci;
@@ -24,10 +24,13 @@ public class ReservationData {
     @NotNull
     private String iloscPodr;
     @NotNull
+    @Pattern(regexp = "[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19}")
     private String imie;
     @NotNull
+    @Pattern(regexp ="([A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]+\\s?){1,4}")
     private String miasto;
     @NotNull
+    @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})(-?[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})?")
     private String nazwisko;
     private String opcje;
     @NotNull
@@ -36,13 +39,16 @@ public class ReservationData {
     @Temporal(TemporalType.DATE)
     private Calendar powrot;
     @NotNull
+    @Pattern(regexp = "[0-9]{9}")
     private String tel;
     @NotNull
     private String wycieczka;
     @Temporal(TemporalType.DATE)
     private Calendar wyjazd;
     @NotNull
+    @Pattern(regexp ="\\d{2}-\\d{3}")
     private String zip;
+
 
     public Integer getRes_id() {
         return res_id;
@@ -162,5 +168,27 @@ public class ReservationData {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ReservationData{" +
+             //   "res_id=" + res_id +
+                ", adres='" + adres + '\'' +
+                ", dzieci=" + dzieci +
+                ", email='" + email + '\'' +
+                ", iloscPodr='" + iloscPodr + '\'' +
+                ", imie='" + imie + '\'' +
+                ", miasto='" + miasto + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", opcje='" + opcje + '\'' +
+                ", pokoje=" + pokoje +
+                ", powrot=" + powrot.getTime().toInstant() +
+                ", tel='" + tel + '\'' +
+                ", wycieczka='" + wycieczka + '\'' +
+                ", wyjazd=" + wyjazd.getTime().toInstant() +
+                ", zip='" + zip + '\'' +
+                '}';
     }
 }
