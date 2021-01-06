@@ -29,7 +29,11 @@ public class GeneralController {
     @GetMapping("/form")
     public String getForm(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(String.format("Username %s Password %s Roles %s Details %s", ((AppUser)auth.getPrincipal()).getUsername(), auth.getCredentials(), auth.getAuthorities(), auth.getDetails()));
+        System.out.println(String.format(
+                "Username %s Password %s Roles %s Details %s",
+                ((AppUser)auth.getPrincipal()).getUsername(), //TODO use this to assign reservations to users
+                auth.getCredentials(), auth.getAuthorities(),
+                auth.getDetails()));
 
         return "form";
     }

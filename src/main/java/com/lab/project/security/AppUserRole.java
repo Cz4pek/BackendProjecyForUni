@@ -37,7 +37,7 @@ public enum AppUserRole {
     public Set<SimpleGrantedAuthority> getGrantedRole() {
         Set<SimpleGrantedAuthority> permission = new HashSet<>();
         permission.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        System.out.println("ROLE_" + this.name());
+       // System.out.println("ROLE_" + this.name());
         return permission;
 
     }

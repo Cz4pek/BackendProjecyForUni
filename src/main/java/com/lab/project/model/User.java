@@ -1,9 +1,10 @@
 package com.lab.project.model;
 
-import org.springframework.security.core.GrantedAuthority;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 //@Table(name = "users")
@@ -35,7 +36,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 
     public String getEmail() {
