@@ -3,6 +3,7 @@ package com.lab.project.controller;
 import com.lab.project.model.ReservationData;
 import com.lab.project.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,7 +19,9 @@ public class FormController{
     @Autowired
     private ReservationService reservationService;
 
+
     @PostMapping("/form")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public List<FieldError> addReservation(@Valid @RequestBody ReservationData reservationData, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             System.out.println("errory jakieś");

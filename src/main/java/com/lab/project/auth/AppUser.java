@@ -22,7 +22,10 @@ public class AppUser implements UserDetails {
 
     public AppUser(String username,
                    String password,
-                   String email, String firstname, String lastname, Set<? extends GrantedAuthority> grantedAuthorities,
+                   String email,
+                   String firstname,
+                   String lastname,
+                   Set<? extends GrantedAuthority> grantedAuthorities,
                    boolean isAccountNonExpired,
                    boolean isAccountNonLocked,
                    boolean isCredentialsNonExpired,

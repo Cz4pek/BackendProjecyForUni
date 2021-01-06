@@ -1,5 +1,6 @@
 package com.lab.project.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,6 +17,7 @@ public class GeneralController {
         return "kontakt";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/form")
     public String getForm(){
         return "form";
