@@ -1,11 +1,16 @@
 package com.lab.project.auth;
 
 
+import com.lab.project.model.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class AppUser implements UserDetails {
 
@@ -41,22 +46,23 @@ public class AppUser implements UserDetails {
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
     }
-
+    public AppUser(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
+        this.grantedAuthorities = Arrays.stream(user.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
+        this.isAccountNonExpired = user.isAccountNonExpired();
+        this.isAccountNonLocked = user.isAccountNonLocked();
+        this.isCredentialsNonExpired = user.isCredentialsNonExpired();
+        this.isEnabled = user.isEnabled();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
     }
 
     @Override
@@ -88,4 +94,7 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+
+
 }

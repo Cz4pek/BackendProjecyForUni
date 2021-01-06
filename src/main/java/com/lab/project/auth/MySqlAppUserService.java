@@ -1,6 +1,8 @@
 package com.lab.project.auth;
 
 import com.google.common.collect.Lists;
+import com.lab.project.model.User;
+import com.lab.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -17,20 +19,26 @@ public class MySqlAppUserService implements AppUserDao{
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     public MySqlAppUserService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Optional<AppUser> selectAppUserByUsername(String username) {
+    public Optional<User> selectAppUserByUsername(String username) {
 
-        return getApplicationUsers()
-                .stream()
-                .filter(applicationUser -> username.equals(applicationUser.getUsername()))
-                .findFirst();
+        return userRepository.findByUsername(username);
+//                getApplicationUsers()
+//                .stream()
+//                .filter(applicationUser -> username.equals(applicationUser.getUsername()))
+//                .findFirst();
     }
 
     private List<AppUser> getApplicationUsers() {
+
+        Iterable<User> users = userRepository.findAll();
         List<AppUser> applicationUsers = Lists.newArrayList(
                 new AppUser(
                         "USER",

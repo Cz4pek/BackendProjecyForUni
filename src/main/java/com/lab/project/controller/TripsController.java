@@ -1,8 +1,11 @@
 package com.lab.project.controller;
 
 import com.lab.project.model.Trip;
+import com.lab.project.security.AppUserRole;
 import com.lab.project.service.TripsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,8 @@ public class TripsController {
     public String getTripsDefault( Model model){
         Trip[] allTrips = service.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
+//        String encoded=new BCryptPasswordEncoder().encode("pass");
+//        System.out.println(encoded);
         return "index";
     }
 

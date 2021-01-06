@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -26,7 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final AppUserService appUserService;
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+
+
 
     public SecurityConfig(PasswordEncoder passwordEncoder, AppUserService appUserService) {
         this.passwordEncoder = passwordEncoder;
@@ -42,11 +46,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-            //    .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
               //  .antMatchers("/form").hasAnyRole(ADMIN.name(), USER.name())
                 .antMatchers("/", "/gallery", "/contact", "/contact", "/world", "/country", "/continent", "/error").permitAll()
-                .and().formLogin();
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .and()
+                .rememberMe()// 2 weeks
+                    .tokenRepository(tokenRepository())
+                    .userDetailsService(appUserService)
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("SESSION", "remember-me")
+                    .logoutSuccessUrl("/login");
     }
 
     @Bean
@@ -55,5 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(appUserService);
         return provider;
+    }
+
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+        jdbcTokenRepositoryImpl.setDataSource(dataSource);
+        return jdbcTokenRepositoryImpl;
     }
 }
