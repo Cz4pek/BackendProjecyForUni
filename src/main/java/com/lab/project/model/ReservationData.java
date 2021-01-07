@@ -4,8 +4,7 @@ package com.lab.project.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.Calendar;
 
 @Entity
@@ -13,42 +12,57 @@ public class ReservationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer res_id;
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓa-ząśżźłćó]{1,30})(\\s\\d+/*\\d*)+")
     private String adres;
     @NotNull
+    @PositiveOrZero
     private Integer dzieci;
-    @NotNull
+    @NotBlank
     @Email
     private String email;
-    @NotNull
+    @NotBlank
+    @PositiveOrZero
     private String iloscPodr;
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19}")
     private String imie;
-    @NotNull
+    @NotBlank
     @Pattern(regexp ="([A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]+\\s?){1,4}")
     private String miasto;
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})(-?[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})?")
     private String nazwisko;
     private String opcje;
     @NotNull
+    @Positive
     private Integer pokoje;
-    @NotNull
+    @Future
     @Temporal(TemporalType.DATE)
     private Calendar powrot;
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "[0-9]{9}")
     private String tel;
-    @NotNull
+    @NotBlank
     private String wycieczka;
+    @Future
     @Temporal(TemporalType.DATE)
     private Calendar wyjazd;
-    @NotNull
+    @NotBlank
     @Pattern(regexp ="\\d{2}-\\d{3}")
     private String zip;
+    @NotNull
+    @ManyToOne
+    private User user_id;
 
+
+    public User getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
+    }
 
     public Integer getRes_id() {
         return res_id;

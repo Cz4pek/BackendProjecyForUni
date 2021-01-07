@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
 
@@ -26,6 +27,28 @@
                 <li class="nav-item">
                     <a href="contact" class="nav-link">
                         Kontakt
+                    </a>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a href="register" class="nav-link">
+                        Rejestracja
+                    </a>
+                </li>
+                <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_USER')">
+                    <a sec:authentication="name" href="/userpage" class="nav-link">
+                    </a>
+                </li>
+                <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                    <a sec:authentication="name" href="/adminpage" class="nav-link">
+                    </a>
+                </li>
+                <li class="nav-item"   sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+                    <a href="/logout" class="nav-link">
+                        Wyloguj
+                    </a>
+                </li>
+                <li class="nav-item"   sec:authorize="isAnonymous()">
+                    <a href="/login" class="nav-link">
+                        Zaloguj
                     </a>
                 </li>
             </ul>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <nav th:insert="nav.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
+    <nav th:insert="fragments.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="jumbotron-bg"
@@ -51,7 +51,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">E-mail</label>
-                    <input value="aaaa@aaaa" type="text" class="form-control" id="email" title="Proszę wprowdzić adres email z uwzględnieniem znaku @" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" required placeholder="adres E-mail">
+                    <input value="aaaa@aaaa" type="text" class="form-control" id="email" title="Proszę wprowdzić adres email z uwzględnieniem znaku @" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" required  placeholder="adres E-mail">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tel">Telefon</label>
@@ -91,11 +91,11 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="wyjazd">Data wyjazdu</label>
-                    <input value="2020-05-11" type="date" class="form-control" id="wyjazd" required>
+                    <input value="2021-01-30" type="date" class="form-control" id="wyjazd" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="powrot">Data powrotu</label>
-                    <input value="2020-05-13" type="date" class="form-control" id="powrot" required>
+                    <input value="2021-02-13" type="date" class="form-control" id="powrot" required>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="podrozujący">Podróżujący</label>
@@ -308,7 +308,7 @@
         </div>
     </main>
 </div>
-<footer th:insert="nav.html :: footer" class="bg-dark py-4 mt-3"></footer>
+<footer th:insert="fragments.html :: footer" class="bg-dark py-4 mt-3"></footer>
 <div class="stopka py-2">
     <p class="text-center m-0">&copy;CP</p>
 </div>

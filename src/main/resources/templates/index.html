@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,7 +12,7 @@
 </head>
 <body>
 <header>
-    <nav th:insert="nav.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
+    <nav th:insert="fragments.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="jumbotron-bg"
@@ -114,7 +115,7 @@
         </div>
     </main>
 </div>
-<footer th:insert="nav.html :: footer" class="bg-dark py-4 mt-3"></footer>
+<footer th:insert="fragments.html :: footer" class="bg-dark py-4 mt-3"></footer>
 <div class="stopka py-2">
     <p class="text-center m-0">&copy;CP</p>
 </div>

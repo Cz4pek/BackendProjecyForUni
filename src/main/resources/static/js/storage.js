@@ -30,13 +30,13 @@ $(document).ready(function () {
             }
         })
 
+        var dataObj;
         dane.opcje = opcje.toString() === '' ? null : opcje.toString();
         if (validates('')) {
             var lista = JSON.parse(localStorage.getItem('lista'));
             if (lista === null) lista = [];
             lista.push(dane);
             localStorage.setItem('lista', JSON.stringify(lista));
-            console.log(JSON.stringify(dane));
             fetch(' http://localhost:8080/form', {
                 method: 'POST',
                 headers: {
@@ -44,13 +44,11 @@ $(document).ready(function () {
                 },
                 body: JSON.stringify(dane)
             })
-                .then(response => console.log(response))
-                .then(data => {
-                    console.log('Success:', data);
+                .then(response => {
+                    if(response.status === 206)
+                        response.text().then(result => alert("Złe dane " + result))
                 })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+                .catch(error => console.log('error', error));
         }
 
     });

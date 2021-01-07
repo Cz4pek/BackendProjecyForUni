@@ -1,10 +1,12 @@
 package com.lab.project.model;
 
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 //@Table(name = "users")
@@ -12,16 +14,36 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
+    @Pattern(regexp = "^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
     private  String username;
+    @NotBlank
+    @Length(min = 6)
     private  String password;
+    @Email
+    @NotBlank
     private  String email;
+    @NotBlank
+    @Pattern(regexp = "[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19}")
     private  String firstname;
+    @NotBlank
+    @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})(-?[A-ZĄŚŹŻŁĆÓ]{1}[a-ząśżźłćó]{1,19})?")
     private  String lastname;
+    @NotBlank
+    @Pattern(regexp = "^ROLE_USER$|^ROLE_ADMIN$")
     private String roles;
     private  boolean isAccountNonExpired;
     private  boolean isAccountNonLocked;
     private  boolean isCredentialsNonExpired;
     private  boolean isEnabled;
+
+    public User() {
+        roles = "ROLE_USER";
+        isAccountNonExpired = true;
+        isAccountNonLocked = true;
+        isCredentialsNonExpired = true;
+        isEnabled = true;
+    }
 
     public String getUsername() {
         return username;
