@@ -19,6 +19,7 @@ public class AppUser implements UserDetails {
     private final String email;
     private final String firstname;
     private final String lastname;
+//    private String tel;
     private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final boolean isAccountNonExpired;
     private final boolean isAccountNonLocked;
@@ -52,6 +53,7 @@ public class AppUser implements UserDetails {
         this.email = user.getEmail();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
+//        this.tel = user.getTel();
         this.grantedAuthorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());

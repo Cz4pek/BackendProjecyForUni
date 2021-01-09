@@ -1,9 +1,8 @@
 package com.lab.project.service;
 
 import com.lab.project.auth.AppUser;
-import com.lab.project.model.ReservationData;
+import com.lab.project.model.ChangedUserInfo;
 import com.lab.project.model.User;
-import com.lab.project.repository.ReservationsRepository;
 import com.lab.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,22 +13,40 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ReservationService {
+public class UserPageService {
 
     @Autowired
-    private ReservationsRepository reservationsRepository;
-    @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    public void addReservation(ReservationData reservationData) throws UsernameNotFoundException{
+    private Optional<User> getLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> userCheck  = userRepository.findByUsername(
                 ((AppUser)auth.getPrincipal())
                         .getUsername());
         userCheck.orElseThrow(() ->new UsernameNotFoundException("Nie ma zalogowanego użytkownika"));
-        User user =  userCheck.get();
-        reservationData.setUser_id(user);
-        reservationsRepository.save(reservationData);
+        return userCheck;
     }
+
+    public User getUserPage(){
+        Optional<User> userCheck = getLoggedInUser();
+        return userCheck.get();
+    }
+
+    public void changeUsersInfo(ChangedUserInfo changedUserInfo){
+
+        Optional<User> userCheck = getLoggedInUser();
+        User user = userCheck.get();
+        String temp = changedUserInfo.getFirstname();
+        if(temp != null) user.setFirstname(temp);
+        temp = changedUserInfo.getLastname();
+        if(temp != null) user.setLastname(temp);
+        temp = changedUserInfo.getEmail();
+        if(temp != null) user.setEmail(temp);
+
+        userRepository.save(user);
+//        Optional<User> userCheck = getLoggedInUser();
+//        userCheck.get();
+    }
+
 
 }

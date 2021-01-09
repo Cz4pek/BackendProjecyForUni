@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/scss/userpage.css}" rel="stylesheet" />
+    <link th:href="@{/scss/style.css}" rel="stylesheet" />
+    <title>UserPage</title>
+</head>
+<body>
+<header>
+    <nav th:insert="fragments.html :: nav" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark"></nav>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="jumbotron-bg"
+                 th:style="'background: url(/assets/background.jpg) center center / cover no-repeat;'">
+            </div>
+            <div id="ani" style="position: relative">
+                <h1 class="display-4">Witamy w biurze QuoVadis</h1>
+                <p class="lead">Lorem ipsum</p>
+                <p class="lead">Lorem ipsum dolor sit amet</p>
+                <a href="gallery" id="jbutton" class="btn btn-lg btn-outline-info">
+                    Zobacz miejsca w które możesz z nami pojechać
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!--<div class="row" style="max-width: 100%">-->
+<!--    <div class="col-md-3 ">-->
+<!--        <div class="list-group ">-->
+<!--            <a href="#" class="list-group-item list-group-item-action active text-white">Dashboard</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white" >User Management</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Used</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Enquiry</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Dealer</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Media</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Post</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Category</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">New</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Comments</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Appearance</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Reports</a>-->
+<!--            <a href="#" class="list-group-item list-group-item-action text-white">Settings</a>-->
+
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-9">-->
+<!--        <div class="card">-->
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12">-->
+<!--                        <h4>Your Profile</h4>-->
+<!--                        <hr>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12">-->
+<!--                        <form>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="username" class="col-3 col-form-label">User Name*</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="name" class="col-3 col-form-label">First Name</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="name" name="name" placeholder="First Name" class="form-control here" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="lastname" class="col-3 col-form-label">Last Name</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="text" class="col-3 col-form-label">Nick Name*</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="text" name="text" placeholder="Nick Name" class="form-control here" required="required" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="select" class="col-3 col-form-label">Display Name public as</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <select id="select" name="select" class="custom-select">-->
+<!--                                        <option value="admin">Admin</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="email" class="col-3 col-form-label">Email*</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="website" class="col-3 col-form-label">Website</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="website" name="website" placeholder="website" class="form-control here" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="publicinfo" class="col-3 col-form-label">Public Info</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <textarea id="publicinfo" name="publicinfo" cols="40" rows="4" class="form-control"></textarea>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <label for="newpass" class="col-3 col-form-label">New Password</label>-->
+<!--                                <div class="col-8">-->
+<!--                                    <input id="newpass" name="newpass" placeholder="New Password" class="form-control here" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group row">-->
+<!--                                <div class="offset-4 col-8">-->
+<!--                                    <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="container">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Strona główna</a>
+        <div id="1breadcrumb" class="breadcrumb-item active">Profil użytkownika</div>
+    </nav>
+
+    <main class="row">
+        <div class="col-md-3">
+            <h3 class="mb-4">Ustawienia</h3>
+            <div class="list-group">
+                <button id="info" class="list-group-item active list-group-item-action text-white">
+                    Informacje
+                </button>
+                <button id="change" class="list-group-item list-group-item-action text-white" style="background-color: #56B4D3 !important;">
+                    Zmień dane
+                </button>
+                <button id="delete" class="list-group-item list-group-item-action text-white" style="background-color: #dc3545 !important;">
+                    Usuń konto
+                </button>
+            </div>
+        </div>
+        <div th:fragment="userContent" id="userPageContent" class="col-md-9">
+            <div th:insert="fragments.html :: userpage" ></div>
+        </div>
+    </main>
+</div>
+<footer th:insert="fragments.html :: footer" class="bg-dark py-4 mt-3"></footer>
+<div class="stopka py-2">
+    <p class="text-center m-0">&copy;CP</p>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/userpage.js}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

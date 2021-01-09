@@ -32,11 +32,15 @@ public class User {
     @NotBlank
     @Pattern(regexp = "^ROLE_USER$|^ROLE_ADMIN$")
     private String roles;
+//
+//    @NotBlank
+//    @Pattern(regexp = "[0-9]{9}")
+//    private String tel;
+
     private  boolean isAccountNonExpired;
     private  boolean isAccountNonLocked;
     private  boolean isCredentialsNonExpired;
     private  boolean isEnabled;
-
     public User() {
         roles = "ROLE_USER";
         isAccountNonExpired = true;
@@ -44,6 +48,14 @@ public class User {
         isCredentialsNonExpired = true;
         isEnabled = true;
     }
+
+//    public String getTel() {
+//        return tel;
+//    }
+//
+//    public void setTel(String tel) {
+//        this.tel = tel;
+//    }
 
     public String getUsername() {
         return username;

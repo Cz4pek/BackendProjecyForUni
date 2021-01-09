@@ -25,7 +25,7 @@ public class ReservationController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/form")
-   // @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @ResponseBody
     public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationData reservationData, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
