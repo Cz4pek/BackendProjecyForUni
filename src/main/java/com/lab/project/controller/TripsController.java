@@ -1,11 +1,8 @@
 package com.lab.project.controller;
 
-import com.lab.project.model.Trip;
-import com.lab.project.security.AppUserRole;
+import com.lab.project.model.Trips;
 import com.lab.project.service.TripsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TripsController {
 
     @Autowired
-    private TripsService service;
+    private TripsService tripsService;
 
     @GetMapping("/")
     public String getTripsDefault( Model model){
-        Trip[] allTrips = service.getTripsFromCountry();
+        Trips[] allTrips = tripsService.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
 //        String encoded=new BCryptPasswordEncoder().encode("pass");
 //        System.out.println(encoded);
@@ -28,21 +25,23 @@ public class TripsController {
 
     @GetMapping("/world")
     public String getTripsFromWorld( Model model){
-        Trip[] allTrips = service.getTripsFromWorld();
+        Trips[] allTrips = tripsService.getTripsFromWorld();
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }
 
     @GetMapping("/country")
     public String getTripsFromCountry( Model model){
-        Trip[] allTrips = service.getTripsFromCountry();
+
+        Trips[] allTrips = tripsService.getTripsFromCountry();
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }
 
     @GetMapping("/continent")
     public String getTripsFromContinent( Model model){
-        Trip[] allTrips = service.getTripsFromContinent();
+        Trips[] allTrips = tripsService.getTripsFromContinent();
+
         model.addAttribute("Trips", allTrips);
         return "index::offer";
     }

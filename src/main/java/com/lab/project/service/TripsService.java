@@ -1,6 +1,6 @@
 package com.lab.project.service;
 
-import com.lab.project.model.Trip;
+import com.lab.project.model.Trips;
 import com.lab.project.repository.TripsRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,34 +27,42 @@ public class TripsService {
     }
 
 
-    public Trip[] getTripsFromWorld(){
+    public Trips[] getTripsFromWorld(){
 
         Session session = hibernateFactory.openSession();
-        String hql = "FROM Trip E where E.category = 'swiat'";
+        String hql = "FROM Trips E where E.category = 'swiat'";
         return getTrips(session, hql);
     }
 
-    private Trip[] getTrips(Session session, String hql) {
+    private Trips[] getTrips(Session session, String hql) {
         Query query = session.createQuery(hql);
         List results = query.list();
-        Trip[] allTrips = new Trip[results.size()];
+        Trips[] allTrips = new Trips[results.size()];
         for (int i = 0; i < results.size(); i++) {
-            allTrips[i] = (Trip) results.get(i);
+            allTrips[i] = (Trips) results.get(i);
         }
+        session.clear();
+        session.close();
         return allTrips;
+
     }
 
-    public Trip[] getTripsFromCountry(){
+    public Trips[] getTripsFromCountry(){
 
         Session session = hibernateFactory.openSession();
-        String hql = "FROM Trip E where E.category = 'kraj'";
+        String hql = "FROM Trips E where E.category = 'kraj'";
         return getTrips(session, hql);
     }
 
-    public Trip[] getTripsFromContinent(){
+    public Trips[] getTripsFromContinent(){
 
         Session session = hibernateFactory.openSession();
-        String hql = "FROM Trip E where E.category = 'europa'";
+        String hql = "FROM Trips E where E.category = 'europa'";
         return getTrips(session, hql);
+
+    }
+
+    public void addNewOffer(Trips trip) {
+        tripsRepository.save(trip);
     }
 }

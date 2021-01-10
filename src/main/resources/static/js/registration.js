@@ -27,7 +27,15 @@ $(document).ready(function () {
             };
 
             fetch("http://localhost:8080/register", requestOptions)
-                .then(response => response.text())
+                .then(response => {
+                    if (response.status === 206) {
+                        response.text().then(result =>{
+                           if (result === "user or email")alert("Nazwa użytkownika lub email jest błędny ")
+                            else alert("Błędne dane" + result)
+                        })
+                    }
+                    else window.location.href = "http://localhost:8080/login"
+                })
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
         }

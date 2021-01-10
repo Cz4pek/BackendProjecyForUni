@@ -89,16 +89,16 @@
                         <div class="card">
                             <img id="wroclaw"
                                  th:src="${trip.img_url}" alt=""
-                                 th:attr="data-target=${'#collapse' + trip.trip_id}, aria-controls=${'collapse' + trip.trip_id}"
+                                 th:attr="data-target=${'#collapse' + trip.id}, aria-controls=${'collapse' + trip.id}"
                                  class="card-img-top" data-toggle="collapse"
                                  aria-expanded="true">
                             <div class="card-body">
                                 <h4 th:text="${trip.title}" id="title1" class="card-title mb-0"></h4>
                                 <span th:text="${trip.summary}" id="summary1" class="mt-0"></span>
                             </div>
-                            <div th:id="${'collapse' + trip.trip_id}" class="collapse hide" data-parent="#oferty">
+                            <div th:id="${'collapse' + trip.id}" class="collapse hide" data-parent="#oferty">
                                 <div class="col-md-12" id="offerInfo1">
-                                    <h3 th:text="${trip.bodyTitle}" id="bodytitle1"></h3>
+                                    <h3 th:text="${trip.bodytitle}" id="bodytitle1"></h3>
                                     <p th:text="${trip.info}" id="info1"></p>
                                     <br>
                                     <a class="btn btn-primary my-2 w-100" href="form">

@@ -38,7 +38,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     </a>
                 </li>
                 <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                    <a sec:authentication="name" href="/adminpage" class="nav-link">
+                    <a sec:authentication="name" href="/userpage" class="nav-link">
                     </a>
                 </li>
                 <li class="nav-item"   sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
@@ -138,6 +138,47 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             </div>
             <div class="input-group">
                 <button id="submitChanges" type="button" class="btn btn-primary">Zmień dane</button>
+            </div>
+            <script type="text/javascript" th:src="@{/js/userpage.js}"></script>
+        </form>
+    </div>
+    <div th:fragment="addOfferPage" class="container">
+        <form action="" method="post" >
+            <h2 class="text-primary">Wprowadź dane nowej wycieczki </h2>
+            <div class="form-group">
+                <label for="city">Miasto</label>
+                <input  type="text" class="form-control" id="city" required placeholder="Lublin">
+            </div>
+            <div class="form-group ">
+                <label for="summary">Podsumowanie</label>
+                <input type="text" class="form-control" id="summary" required placeholder="Wpisz tu podsumowanie">
+            </div>
+            <div class="form-group">
+                <label for="title">Tytuł</label>
+                <input type="text" class="form-control" id="title" required placeholder="Tytuł">
+            </div>
+            <div class="form-group">
+                <label for="newOfferInfo">Informacje</label>
+                <textarea type="text" class="form-control" id="newOfferInfo"  required placeholder="Informacje"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="img">Link do zdjęcia</label>
+                <input type="text" class="form-control" id="img"  required placeholder="http://example.com">
+            </div>
+            <div class="form-group">
+                <label for="price">Cena</label>
+                <input type="number" class="form-control" id="price" min="1" required placeholder="Cena" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+            <label for="category">Wybierz kategorię</label>
+            <div class="input-group">
+                <select id="category" class="form-control" size="3" required >
+                    <option selected>Kraj</option>
+                    <option>Europa</option>
+                    <option>Świat</option>
+                </select>
+            </div>
+            <div class="input-group mt-2">
+                <button id="submitNewOffer" type="button" class="btn btn-primary">Dodaj wycieczkę</button>
             </div>
             <script type="text/javascript" th:src="@{/js/userpage.js}"></script>
         </form>

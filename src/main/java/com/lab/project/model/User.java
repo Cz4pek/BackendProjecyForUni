@@ -12,9 +12,10 @@ import javax.validation.constraints.Pattern;
 //@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotBlank
+    @Column(unique = true)
     @Pattern(regexp = "^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
     private  String username;
     @NotBlank

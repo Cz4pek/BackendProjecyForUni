@@ -58,18 +58,56 @@ $(document).ready(function () {
 
     $('#delete').click(function () {
 
+        if (confirm("Usunięcie konta spowoduje stracenie dostępu do danych z nim związnych, kontynuować?")){
+
+            var requestOptions = {
+                method: 'DELETE',
+                redirect: 'follow'
+            };
+
+            fetch("http://localhost:8080/userpage/delete", requestOptions)
+                .then(response => {
+                    window.location.href = "http://localhost:8080/logout"
+                })
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+        }
+
+    });
+
+    $('#addOffer').click(function () {
+
+        var url = 'http://localhost:8080/userpage/addOffer';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+                $("#userPageContent").html(data);
+            }
+        })
+    });
+
+
+    $('#submitNewOffer').click(function () {
 
         var data = {};
-        data.firstname = $('#firstname').val();
-        data.lastname = $('#lastname').val();
-        data.email = $('#email').val();
+        data.title = $('#city').val();
+        data.summary = $('#summary').val();
+        data.bodytitle = $('#title').val();
+        data.info = $('#newOfferInfo').val();
+        data.img_url = $('#img').val();
+        data.price = $('#price').val();
+        data.category = $('#category').val();
 
-        if(Object.keys(empty).length === 0 && empty.constructor === Object)
+
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var body = JSON.stringify(data)
+
+        console.log(body);
 
         var requestOptions = {
             method: 'POST',
@@ -78,13 +116,16 @@ $(document).ready(function () {
             redirect: 'follow'
         };
 
-        // fetch("http://localhost:8080/userpage", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
-        //
-        
+        fetch("http://localhost:8080/userpage/addOffer", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+
+
     });
-    
+
+
+
 
 });
