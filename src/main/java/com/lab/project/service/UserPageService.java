@@ -1,9 +1,10 @@
 package com.lab.project.service;
 
+import com.google.common.collect.Iterables;
 import com.lab.project.auth.AppUser;
-import com.lab.project.model.ChangedUserInfo;
-import com.lab.project.model.User;
+import com.lab.project.model.*;
 import com.lab.project.repository.ReservationsRepository;
+import com.lab.project.repository.TripsRepository;
 import com.lab.project.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManagerFactory;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserPageService {
@@ -25,6 +31,8 @@ public class UserPageService {
     UserRepository userRepository;
     @Autowired
     ReservationsRepository reservationsRepository;
+    @Autowired
+    TripsRepository tripsRepository;
 
     private SessionFactory hibernateFactory;
 
@@ -38,7 +46,7 @@ public class UserPageService {
 
 
 
-    private Optional<User> getLoggedInUser() {
+    private Optional<User> getLoggedInUser() throws UsernameNotFoundException{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> userCheck  = userRepository.findByUsername(
                 ((AppUser)auth.getPrincipal())
@@ -68,11 +76,6 @@ public class UserPageService {
 //        userCheck.get();
     }
 
-    private void executeQuery(Session session, Query query) {
-
-
-
-    }
 
     public void deleteCurrentlyLoggedInUser() {
 
@@ -81,12 +84,9 @@ public class UserPageService {
 
         Session session = hibernateFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "DELETE FROM ReservationData E where E.user_id = :id";
+        String hql = "DELETE FROM ReservationData E where E.user = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", user);
-
-
-        System.out.println("To jest query string ktory nie dziala, bydle jedno " + hql);
 
         int count = query.executeUpdate();
         System.out.println(count + " Record(s) Deleted.");
@@ -99,5 +99,21 @@ public class UserPageService {
         userRepository.delete(user);
 
     }
-
+    public UsersReservation[] getTripsReservedByUser(){
+        try {
+            Optional<User> userCheck = getLoggedInUser();
+            ReservationData[] reservationsByUser = reservationsRepository.getByUser(userCheck.get()).toArray(ReservationData[]::new);
+            List<Trips> trips = Arrays.stream(reservationsByUser).map(ReservationData::getTrip).collect(Collectors.toList());
+            Trips[] allTrips = trips.toArray(Trips[]::new);
+            ArrayList<UsersReservation> reservations = new ArrayList<>();
+            for (int i = 0; i < allTrips.length; i++){
+                reservations.add(new UsersReservation(allTrips[i], reservationsByUser[i]));
+            }
+            return reservations.toArray(UsersReservation[]::new);
+        }
+        catch (UsernameNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

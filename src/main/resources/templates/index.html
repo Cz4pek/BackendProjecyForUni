@@ -104,6 +104,9 @@
                                     <a class="btn btn-primary my-2 w-100" href="form">
                                         Rezerwuj
                                     </a>
+                                    <button id="deleteOffer"  th:attr="onclick=${'deleteOffer(' + trip.id + ')'}" class="btn btn-danger my-2 w-100" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                        Usuń
+                                    </button>
                                 </div>
                             </div>
                             <div th:text="${trip.price + ' zł/os'}" id="footer1" class="card-footer text-center">

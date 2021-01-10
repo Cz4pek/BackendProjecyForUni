@@ -16,8 +16,8 @@ public class ReservationData {
     @Pattern(regexp = "([A-ZĄŚŹŻŁĆÓa-ząśżźłćó]{1,30})(\\s\\d+/*\\d*)+")
     private String adres;
     @NotNull
-    @PositiveOrZero
-    private Integer dzieci;
+//    @PositiveOrZero
+    private String dzieci;
     @NotBlank
     @Email
     private String email;
@@ -53,15 +53,25 @@ public class ReservationData {
     private String zip;
     @NotNull
     @ManyToOne
-    private User user_id;
+    private User user;
+    @NotNull
+    @OneToOne
+    private Trips trip;
 
+    public Trips getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trips trip) {
+        this.trip = trip;
+    }
 
     public User getUser_id() {
-        return user_id;
+        return user;
     }
 
     public void setUser_id(User user_id) {
-        this.user_id = user_id;
+        this.user = user_id;
     }
 
     public Integer getRes_id() {
@@ -80,11 +90,11 @@ public class ReservationData {
         this.adres = adres;
     }
 
-    public Integer getDzieci() {
+    public String getDzieci() {
         return dzieci;
     }
 
-    public void setDzieci(Integer dzieci) {
+    public void setDzieci(String dzieci) {
         this.dzieci = dzieci;
     }
 

@@ -75,18 +75,7 @@
             <h2 class="pb-2 text-primary">Informacje o podróży: </h2>
             <label for="oferta">Wybierz interesującą cię wycieczkę</label>
             <select id="oferta" class="form-control" size="12" required >
-                <option selected>Wrocław</option>
-                <option>Zakopane</option>
-                <option>Kraków </option>
-                <option>Gdańsk </option>
-                <option>Wenecja </option>
-                <option>Reykjavik </option>
-                <option>Paryż </option>
-                <option>Nicea </option>
-                <option>Władywostok </option>
-                <option>Kotte </option>
-                <option>Pekin </option>
-                <option>Bali </option>
+                <option th:each="trip : ${Trips}" th:text="${trip.bodytitle + '   Cena : ' + trip.price + ' zł/os'}" th:value="${trip.id}"></option>
             </select>
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -227,18 +216,7 @@
                             <h2 class="pb-2 text-danger">Informacje o podróży: </h2>
                             <label for="editoferta">Wybierz interesującą cię wycieczkę</label>
                             <select id="editoferta" class="form-control" size="12" required >
-                                <option selected>Wrocław</option>
-                                <option>Zakopane</option>
-                                <option>Kraków </option>
-                                <option>Gdańsk </option>
-                                <option>Wenecja </option>
-                                <option>Reykjavik </option>
-                                <option>Paryż </option>
-                                <option>Nicea </option>
-                                <option>Władywostok </option>
-                                <option>Kotte </option>
-                                <option>Pekin </option>
-                                <option>Bali </option>
+                                <option th:each="trip : ${Trips}" th:text="${trip.price}"></option>
                             </select>
                             <div class="form-row">
                                 <div class="form-group col-md-4">

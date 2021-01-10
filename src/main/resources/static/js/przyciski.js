@@ -49,6 +49,14 @@ $(document).ready(function () {
     $('#pokaz').click(function () {
         pokazListe();
     });
+
+
+
+
+
+
+
+
 });
 function strona1() {
     if ($('#kraj').hasClass('active')) ofertakKraj();
@@ -79,4 +87,23 @@ function pokazOferty() {
     var oferty = $('#oferty');
     oferty.css({opacity: '0'});
     oferty.animate({opacity: '1'}, "slow");
+}
+
+function deleteOffer(offerId){
+    if (confirm("Usunąć ofertę?")){
+
+        console.log(offerId);
+
+        var requestOptions = {
+            method: 'DELETE',
+            redirect: 'follow',
+            body: offerId
+        };
+
+        fetch("http://localhost:8080/trips/delete?offerId=" + offerId, requestOptions)
+            .then(response => response.text())
+            .then(result => $("#oferty").html(result))
+            .catch(error => console.log('error', error));
+
+    }
 }

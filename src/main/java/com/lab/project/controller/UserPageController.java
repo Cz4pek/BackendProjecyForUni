@@ -3,6 +3,7 @@ package com.lab.project.controller;
 import com.lab.project.model.ChangedUserInfo;
 import com.lab.project.model.Trips;
 import com.lab.project.model.User;
+import com.lab.project.model.UsersReservation;
 import com.lab.project.service.TripsService;
 import com.lab.project.service.UserPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class UserPageController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/userpage")
     public String getUserPage(Model model){
-
+        UsersReservation[] allTrips = userPageService.getTripsReservedByUser();
+        model.addAttribute("Trips", allTrips);
         addUserToModel(model);
         return "userpage";
     }
@@ -39,7 +41,7 @@ public class UserPageController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/userpage/info")
     public String getUserInfo( Model model){
-
+        userPageService.getTripsReservedByUser();
         addUserToModel(model);
         return "fragments::userpage";
     }
